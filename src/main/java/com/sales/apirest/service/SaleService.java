@@ -5,6 +5,7 @@ import com.sales.apirest.exception.NotFoundException;
 import com.sales.apirest.mapper.SaleMapper;
 import com.sales.apirest.model.dto.SaleResponse;
 import com.sales.apirest.model.dto.SalesByDateResponse;
+import com.sales.apirest.model.dto.SalesPeriodResponse;
 import com.sales.apirest.model.entity.Product;
 import com.sales.apirest.model.entity.Sale;
 import com.sales.apirest.repository.ProductRepository;
@@ -58,10 +59,16 @@ public class SaleService {
         return saleMapper.toSaleResponse(saleSaved);
     }
 
-    public List<SalesByDateResponse> findByDateRange(LocalDateTime startDate, LocalDateTime endDate){
-        return saleRepository.findByDateBetween(startDate, endDate)
+    public SalesPeriodResponse findByDateRange(LocalDateTime startDate, LocalDateTime endDate){
+         List<SalesByDateResponse> salesByDate = saleRepository.findByDateBetween(startDate, endDate)
                 .stream()
                 .map(saleMapper::toSalesByDateResponse)
                 .toList();
+
+        double totalSales = salesByDate.stream()
+                .mapToDouble(SalesByDateResponse::getTotal)
+                .sum();
+
+        return new SalesPeriodResponse(salesByDate, totalSales);
     }
 }

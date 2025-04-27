@@ -5,6 +5,7 @@ import com.sales.apirest.exception.NotFoundException;
 import com.sales.apirest.mapper.ProductMapper;
 import com.sales.apirest.model.dto.ProductRequest;
 import com.sales.apirest.model.dto.ProductResponse;
+import com.sales.apirest.model.dto.UpdateProductRequest;
 import com.sales.apirest.model.entity.Product;
 import com.sales.apirest.model.entity.Sale;
 import com.sales.apirest.repository.ProductRepository;
@@ -42,12 +43,13 @@ public class ProductService {
                 .toList();
     }
 
-    public ProductResponse updateProduct(Long id, ProductRequest productRequest) {
+    public ProductResponse updateProduct(Long id, UpdateProductRequest productRequest) {
         return productRepository.findById(id)
                 .map(prod -> {
-                    prod.setDescription(productRequest.getDescription());
-                    prod.setUnitPrice(productRequest.getUnitPrice());
-                    prod.setStock(productRequest.getStock());
+                    if(productRequest.getUnitPrice() != null)
+                        prod.setUnitPrice(productRequest.getUnitPrice());
+                    if(productRequest.getStock() != null)
+                        prod.setStock(productRequest.getStock());
                     productRepository.save(prod);
 
                     return productMapper.toProductResponse(prod);

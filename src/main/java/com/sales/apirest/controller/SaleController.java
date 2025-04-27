@@ -2,6 +2,7 @@ package com.sales.apirest.controller;
 
 import com.sales.apirest.model.dto.SaleResponse;
 import com.sales.apirest.model.dto.SalesByDateResponse;
+import com.sales.apirest.model.dto.SalesPeriodResponse;
 import com.sales.apirest.service.SaleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -51,7 +52,7 @@ public class SaleController {
             description = "Returns sales filtered by a date range")
     @ApiResponse(responseCode = "200", description = "Successful operation")
     @GetMapping("date-range")
-    public List<SalesByDateResponse> filterSales(@Parameter(description = "Start date", example = "2025-04-25T02:20") @RequestParam LocalDateTime startDate, @Parameter(description = "End date", example = "2025-04-25T02:20") @RequestParam LocalDateTime endDate){
+    public SalesPeriodResponse filterSales(@Parameter(description = "Start date", example = "2025-04-10T02:20") @RequestParam LocalDateTime startDate, @Parameter(description = "End date", example = "2025-04-15T02:20") @RequestParam LocalDateTime endDate){
         return saleService.findByDateRange(startDate, endDate);
     }
 }

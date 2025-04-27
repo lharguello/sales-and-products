@@ -18,5 +18,5 @@ public class SalesByDateResponse {
     private String productDescription;
 
     @Schema(description = "Total sales", example = "150")
-    private Double totalSales;
+    private Double total;
 }

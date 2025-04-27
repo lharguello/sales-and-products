@@ -2,6 +2,7 @@ package com.sales.apirest.controller;
 
 import com.sales.apirest.model.dto.ProductRequest;
 import com.sales.apirest.model.dto.ProductResponse;
+import com.sales.apirest.model.dto.UpdateProductRequest;
 import com.sales.apirest.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -49,8 +50,8 @@ public class ProductController {
             description = "Return product updated")
     @ApiResponse(responseCode = "200", description = "Successful operation")
     @PutMapping("{id}")
-    public ProductResponse getById(@Parameter(description = "Product identifier", example = "1") @PathVariable("id") Long id, @RequestBody ProductRequest product){
-        return productService.updateProduct(id, product);
+    public ProductResponse updateById(@Parameter(description = "Product identifier", example = "1") @PathVariable("id") Long id, @RequestBody UpdateProductRequest request){
+        return productService.updateProduct(id, request);
     }
 
     @Operation(summary = "Delete a product",

@@ -15,6 +15,8 @@ INSERT INTO products (id, description, unit_price, stock) VALUES (13, 'Gabinete'
 INSERT INTO products (id, description, unit_price, stock) VALUES (14, 'Fuente de Poder 650W', 85.0, 10);
 INSERT INTO products (id, description, unit_price, stock) VALUES (15, 'SSD Samsung 500GB', 75.0, 20);
 
+ALTER TABLE products ALTER COLUMN id RESTART WITH 16;
+
 -- ventas
 INSERT INTO sales (id, product_id, date, quantity, unit_price, total) VALUES (1, 1, '2025-04-13 20:00:00', 1, 850.0, 850.0);
 INSERT INTO sales (id, product_id, date, quantity, unit_price, total) VALUES (2, 2, '2025-04-21 18:30:00', 2, 25.99, 51.98);
@@ -24,3 +26,5 @@ INSERT INTO sales (id, product_id, date, quantity, unit_price, total) VALUES (5,
 INSERT INTO sales (id, product_id, date, quantity, unit_price, total) VALUES (6, 8, '2025-04-16 10:55:00', 1, 49.99, 49.99);
 INSERT INTO sales (id, product_id, date, quantity, unit_price, total) VALUES (7, 10, '2025-04-17 11:45:00', 3, 15.0, 45.0);
 INSERT INTO sales (id, product_id, date, quantity, unit_price, total) VALUES (8, 15, '2025-04-16 19:05:00', 1, 75.0, 75.0);
+
+ALTER TABLE sales ALTER COLUMN id RESTART WITH 9;

@@ -17,6 +17,5 @@ public interface SaleMapper {
 
     @Mapping(target = "productId", source = "product.id")
     @Mapping(target = "productDescription", source = "product.description")
-    @Mapping(target = "totalSales", source = "total")
     SalesByDateResponse toSalesByDateResponse(Sale sale);
 }
